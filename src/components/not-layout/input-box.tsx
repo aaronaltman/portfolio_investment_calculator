@@ -2,57 +2,31 @@
 
 import React, { useState } from "react";
 import { Button } from "../ui/button";
+import { on } from "events";
 
 type HandleInitialProps = React.ChangeEvent<HTMLInputElement>;
 
-export default function InputBox() {
-  const [initialInvestment, setInitialInvestment] = useState("");
-  const [monthlyInvestment, setMonthlyInvestment] = useState("");
-  const [investmentPeriod, setInvestmentPeriod] = useState("");
-  const [estimatedRateOfReturn, setEstimatedRateOfReturn] = useState("");
+interface InputBoxProps {
+  initialInvestment: string;
+  onInitialInvestmentChange: (event: HandleInitialProps) => void;
+  monthlyInvestment: string;
+  onMonthlyInvestmentChange: (event: HandleInitialProps) => void;
+  investmentPeriod: string;
+  onInvestmentPeriodChange: (event: HandleInitialProps) => void;
+  estimatedRateOfReturn: string;
+  onEstimatedRateOfReturnChange: (event: HandleInitialProps) => void;
+}
 
-  const handleInitialInvestmentChange = (event: HandleInitialProps) => {
-    // Convert the input value to a number before setting the state
-    let value = Number(event.target.value);
-    if (value < 0) {
-      alert("Initial investment cannot be negative");
-      return;
-    }
-    setInitialInvestment(value.toString());
-    console.log(value);
-  };
-
-  const handleMonthlyInvestmentChange = (event: HandleInitialProps) => {
-    // Convert the input value to a number before setting the state
-    let value = Number(event.target.value);
-    if (value < 0) {
-      alert("Initial investment cannot be negative");
-      return;
-    }
-    setMonthlyInvestment(value.toString());
-    console.log(value);
-  };
-  const handleInvestmentPeriodChange = (event: HandleInitialProps) => {
-    // Convert the input value to a number before setting the state
-    let value = Number(event.target.value);
-    if (value < 0) {
-      alert("Initial investment cannot be negative");
-      return;
-    }
-    setInvestmentPeriod(value.toString());
-    console.log(value);
-  };
-  const handleEstimatedRateOfReturnChange = (event: HandleInitialProps) => {
-    // Convert the input value to a number before setting the state
-    let value = Number(event.target.value);
-    if (value < 0) {
-      alert("Initial investment cannot be negative");
-      return;
-    }
-    setEstimatedRateOfReturn(value.toString());
-    console.log(value);
-  };
-
+export default function InputBox({
+  initialInvestment,
+  onInitialInvestmentChange,
+  monthlyInvestment,
+  onMonthlyInvestmentChange,
+  investmentPeriod,
+  onInvestmentPeriodChange,
+  estimatedRateOfReturn,
+  onEstimatedRateOfReturnChange,
+}: InputBoxProps) {
   return (
     <section className="bg-slate-900 max-w-2xl mx-auto py-8 my-6 rounded-md shadow-md">
       <h1 className="text-center text-white text-xl font-semibold py-4">
@@ -65,7 +39,7 @@ export default function InputBox() {
             type="number"
             placeholder="Enter your initial investment amount"
             className="mt-2 p-3 rounded border-none bg-slate-700 text-white placeholder-gray-300"
-            onChange={handleInitialInvestmentChange}
+            onChange={onInitialInvestmentChange}
             value={initialInvestment}
           />
         </label>
@@ -75,7 +49,7 @@ export default function InputBox() {
             type="number"
             placeholder="Enter your monthly investment amount"
             className="mt-2 p-3 rounded border-none bg-slate-700 text-white placeholder-gray-300"
-            onChange={handleMonthlyInvestmentChange}
+            onChange={onMonthlyInvestmentChange}
             value={monthlyInvestment}
           />
         </label>
@@ -85,7 +59,7 @@ export default function InputBox() {
             type="number"
             placeholder="Enter investment period in years"
             className="mt-2 p-3 rounded border-none bg-slate-700 text-white placeholder-gray-300"
-            onChange={handleInvestmentPeriodChange}
+            onChange={onInvestmentPeriodChange}
             value={investmentPeriod}
           />
         </label>
@@ -95,13 +69,10 @@ export default function InputBox() {
             type="number"
             placeholder="Enter estimated rate of return"
             className="mt-2 p-3 rounded border-none bg-slate-700 text-white placeholder-gray-300"
-            onChange={handleEstimatedRateOfReturnChange}
+            onChange={onEstimatedRateOfReturnChange}
             value={estimatedRateOfReturn}
           />
         </label>
-        <div className="flex w-full bg-white justify-center">
-          <Button variant={"secondary"}>Calculate</Button>
-        </div>
       </form>
     </section>
   );

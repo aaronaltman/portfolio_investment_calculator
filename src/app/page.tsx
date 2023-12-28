@@ -1,13 +1,11 @@
 import Header from "@/components/not-layout/header";
-import InputBox from "@/components/not-layout/input-box";
-import OutputTable from "@/components/not-layout/output-table";
+import InputPlusBoxTable2 from "@/components/not-layout/input-box-table-2";
 
 export default function Home() {
   return (
     <main className="flex flex-col justify-center items-center">
       <Header />
-      <InputBox />
-      <OutputTable />
+      <InputPlusBoxTable2 />
     </main>
   );
 }
