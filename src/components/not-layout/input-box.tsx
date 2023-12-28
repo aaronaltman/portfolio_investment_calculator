@@ -8,8 +8,8 @@ type HandleInitialProps = React.ChangeEvent<HTMLInputElement>;
 export default function InputBox() {
   const [initialInvestment, setInitialInvestment] = useState("");
   const [monthlyInvestment, setMonthlyInvestment] = useState("");
-  const [investmentPeriod, setInvestmentPeriod] = useState(0);
-  const [estimatedRateOfReturn, setEstimatedRateOfReturn] = useState(0);
+  const [investmentPeriod, setInvestmentPeriod] = useState("");
+  const [estimatedRateOfReturn, setEstimatedRateOfReturn] = useState("");
 
   const handleInitialInvestmentChange = (event: HandleInitialProps) => {
     // Convert the input value to a number before setting the state
@@ -30,6 +30,26 @@ export default function InputBox() {
       return;
     }
     setMonthlyInvestment(value.toString());
+    console.log(value);
+  };
+  const handleInvestmentPeriodChange = (event: HandleInitialProps) => {
+    // Convert the input value to a number before setting the state
+    let value = Number(event.target.value);
+    if (value < 0) {
+      alert("Initial investment cannot be negative");
+      return;
+    }
+    setInvestmentPeriod(value.toString());
+    console.log(value);
+  };
+  const handleEstimatedRateOfReturnChange = (event: HandleInitialProps) => {
+    // Convert the input value to a number before setting the state
+    let value = Number(event.target.value);
+    if (value < 0) {
+      alert("Initial investment cannot be negative");
+      return;
+    }
+    setEstimatedRateOfReturn(value.toString());
     console.log(value);
   };
 
@@ -65,6 +85,8 @@ export default function InputBox() {
             type="number"
             placeholder="Enter investment period in years"
             className="mt-2 p-3 rounded border-none bg-slate-700 text-white placeholder-gray-300"
+            onChange={handleInvestmentPeriodChange}
+            value={investmentPeriod}
           />
         </label>
         <label className="flex flex-col min-w-[200px] text-white">
@@ -73,6 +95,8 @@ export default function InputBox() {
             type="number"
             placeholder="Enter estimated rate of return"
             className="mt-2 p-3 rounded border-none bg-slate-700 text-white placeholder-gray-300"
+            onChange={handleEstimatedRateOfReturnChange}
+            value={estimatedRateOfReturn}
           />
         </label>
         <div className="flex w-full bg-white justify-center">
