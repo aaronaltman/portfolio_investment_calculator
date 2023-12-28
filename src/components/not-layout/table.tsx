@@ -15,8 +15,8 @@ const data = [
 export default function DataTable() {
   return (
     <div>
-      <section>
-        <table>
+      <section className="">
+        <table className="w-full">
           {/* Table Head */}
           <thead>
             <tr>
